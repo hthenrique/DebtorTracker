@@ -1,0 +1,17 @@
+server:
+  port: ${PORT:8080}
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    url: jdbc:sqlite:debtors.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    hibernate:
+      database-platform: org.hibernate.community.dialect.SQLiteDialect
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
