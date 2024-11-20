@@ -1,0 +1,43 @@
+button {
+    min-width: 100px;
+    min-height: 30px;
+    border-radius: 10px;
+    border: none;
+    margin: 5px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-add {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-add:hover {
+    background-color: #1e7e34;
+    color: #fff;
+}
+
+.btn-edit {
+    background-color: #469bf7;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background-color: #0069d9;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #db4c5a;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    color: #fff;    
+} 

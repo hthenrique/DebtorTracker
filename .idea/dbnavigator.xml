@@ -27,9 +27,7 @@ delete from debtor where id = 2;]]></console>
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="ca17dd05-3a2f-4426-8b61-309da6321c46" object-ref="consoles/Connection" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="ca17dd05-3a2f-4426-8b61-309da6321c46" />

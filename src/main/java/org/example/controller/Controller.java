@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
-@RequestMapping("/debtors")
+@RequestMapping("api/debtors")
 public class Controller {
 
     @Autowired
