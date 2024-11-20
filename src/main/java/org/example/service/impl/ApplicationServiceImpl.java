@@ -93,7 +93,12 @@ public class ApplicationServiceImpl implements ApplicationService {
 
         Debtor debtorEntity = CompareUtils.getUpdatedDebtor(oldDebtor, newDebtor);
 
-        debtorRepository.save(debtorEntity);
+        try {
+            debtorRepository.save(debtorEntity);
+        } catch (Exception e){
+            log.error("Algo de errado aconteceu na atualização do usuário", e);
+            throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na atualização do usuário");
+        }
         applicationResponse.setResponse_code(Codes.SUCCESS.getCode());
         applicationResponse.setResponse_message("Success");
         return applicationResponse;
