@@ -8,26 +8,65 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/debtor.css'>
     <script src='js/main.js'></script>
+    <script src='js/formatter.js'></script>
+    <script src='js/services.js'></script>
+    <script src='js/debtor.js'></script>
 </head>
-
+<header>
+    <div>
+        <h1>Lista de pessoas cadastradas</h1>
+    </div>
+</header>
 <body>
+    
     <main>
-        <h1>Lista de pessoas cadastradas</h1> <button class="btn btn-add">Adicionar Novo Usuário</button>
-        <table id="lista-usuarios">
+        <div style="display: flex; justify-content: right;">
+            <button class="btn btn-add">Adicionar Novo Devedor</button>
+        </div>
+        <table id="list-debtors">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
+                    <th>CPF</th>
                     <th>E-mail</th>
                     <th>Telefone</th>
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody id="lista-usuarios-tbody">
-                <!-- Aqui será renderizada a lista de usuários -->
+            <tbody id="list-debtors-tbody">
             </tbody>
         </table>
+
+        <div id="modal" class="modal" style="display: none;">
+            <div id="modal-content" class="modal-content">
+                <h2 id="info-debtor-title"></h2>
+                <div id="info-user">
+                    <div class="info-debtor-container">
+                        <div class="info-debtor-item">
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome"></input>
+                        </div>
+                        <div class="info-debtor-item">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" id="cpf" oninput="maskCPF(event, null)"></input>
+                        </div>
+                    </div>
+                    <div class="info-debtor-container">
+                        <div class="info-debtor-item">
+                            <label for="email">E-mail:</label>
+                            <input type="text" id="email"></input>
+                        </div>
+                        <div class="info-debtor-item">
+                            <label for="phone">Telefone:</label>
+                            <input type="text" id="phone" oninput="maskPhone(event, null)" maxlength="15"></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 

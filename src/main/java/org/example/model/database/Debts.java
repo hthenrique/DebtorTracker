@@ -16,9 +16,8 @@ public class Debts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_debt;
 
-    @ManyToOne
-    @JoinColumn(name = "id_debtor")
-    private Debtor debtor;
+    @Column(name = "id_debtor")
+    private Integer id_debtor;
 
     @Column(name = "debt_date")
     private String debt_date;

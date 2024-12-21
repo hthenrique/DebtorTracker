@@ -1,10 +1,12 @@
 package org.example.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.model.ApplicationResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+@Slf4j
 @ControllerAdvice
 public class DefaultExceptionHandler {
 
@@ -17,6 +19,7 @@ public class DefaultExceptionHandler {
         ApplicationResponse applicationResponse = new ApplicationResponse();
         applicationResponse.setResponse_code(e.getResponseCode().getCode());
         applicationResponse.setResponse_message(e.getMessage());
+        log.error(String.format(applicationResponse.toString()));
         return ResponseEntity.status(e.getResponseCode().getHttpStatus()).body(applicationResponse);
     }
 }

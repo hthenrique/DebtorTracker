@@ -1,32 +1,32 @@
-#lista-usuarios {
+#list-debtors {
     border-collapse: collapse;
     width: 100%;
 }
 
-#lista-usuarios th,
-#lista-usuarios td {
+#list-debtors th,
+#list-debtors td {
     border: 1px solid #ddd;
     padding: 10px;
 }
 
-#lista-usuarios th {
+#list-debtors th {
     background-color: #f0f0f0;
 }
 
-#lista-usuarios tbody tr:nth-child(even) {
+#list-debtors tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-#lista-usuarios tbody tr:hover {
+#list-debtors tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-#lista-usuarios a {
+#list-debtors a {
     text-decoration: none;
     color: #337ab7;
 }
 
-#lista-usuarios a:hover {
+#list-debtors a:hover {
     color: #23527c;
 }
 

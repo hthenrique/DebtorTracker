@@ -15,6 +15,7 @@ import org.example.repository.DebtsRepository;
 import org.example.service.ApplicationService;
 import org.example.type.Codes;
 import org.example.util.CompareUtils;
+import org.example.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -126,6 +127,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     private Debtor findDebtor(String id, String searchType) throws RepositoryException, BusinessException {
+        StringUtils.isEmpty(searchType, id);
         try {
             if (searchType.equals("id")){
                 return debtorRepository.findById(Long.valueOf(id)).get();
