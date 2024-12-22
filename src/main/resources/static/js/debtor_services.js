@@ -40,3 +40,28 @@ function loadDebtorById(uid) {
         return Promise.reject('UID is required');
     }
 }
+
+function deleteDebtor(uid) {
+    if (uid) {
+        const headers = {
+            'Content-Type': 'application/json',
+            'id': uid
+        };
+
+        return fetch(`/api/debtors/delete_debtor`, { method: 'DELETE', headers: headers })
+            .then(data => {
+                if (data.status == 204) {
+                    return true;
+                } else {
+                    console.error('Erro ao processar a resposta da API');
+                    return false;
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                return false;
+            });
+    } else {
+        return Promise.reject('UID is required');
+    }
+}

@@ -103,6 +103,7 @@ public class DebtorsServiceImpl implements DebtorsService {
 
     @Override
     public ApplicationResponse delete(String id) throws BusinessException, RepositoryException {
+        log.info(String.format("Deleting debtor %s", StringUtils.isEmpty("id", id)));
         findDebtor(id, "id");
         try {
             debtorRepository.deleteById(Long.valueOf(id));

@@ -122,7 +122,7 @@ public class DebtsServiceImpl implements DebtsService {
     }
 
     private static void verifyDebt(Debts debtorEntity) throws BusinessException {
-        BigDecimal debt_missing = debtorEntity.getDebt_paid().subtract(debtorEntity.getDebt());
+        BigDecimal debt_missing = debtorEntity.getDebt().subtract(debtorEntity.getDebt_paid());
         if (debt_missing.compareTo(BigDecimal.ZERO) < 0){
             throw new BusinessException(Codes.INVALID_PARAMETERS, "Valor pago maior que o valor da divida");
         }
