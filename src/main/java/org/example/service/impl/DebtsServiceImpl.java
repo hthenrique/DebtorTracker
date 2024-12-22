@@ -22,6 +22,7 @@ import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -79,8 +80,8 @@ public class DebtsServiceImpl implements DebtsService {
         String id;
 
         Debts debtorEntity = debtMapper.toDebtor(debt);
-        Debtor debtor = findDebtor(debt.getId_debtor());
-//        debtorEntity.setDebtor(debtor);
+        verifyDebt(debtorEntity);
+        findDebtor(debt.getId_debtor());
         try {
             id = String.valueOf(debtsRepository.saveAndFlush(debtorEntity).getId_debt());
         } catch (PropertyValueException e) {
@@ -106,7 +107,7 @@ public class DebtsServiceImpl implements DebtsService {
         Debts newDebtor = debtMapper.toDebtor(debt);
 
         Debts debtorEntity = CompareUtils.getUpdatedDebt(oldDebtor, newDebtor);
-
+        verifyDebt(debtorEntity);
         try {
             debtsRepository.save(debtorEntity);
         } catch (Exception e){
@@ -118,6 +119,14 @@ public class DebtsServiceImpl implements DebtsService {
         applicationResponse.setResponse_message("Success");
         log.info("Success updated debt {}", debt.getId_debt());
         return applicationResponse;
+    }
+
+    private static void verifyDebt(Debts debtorEntity) throws BusinessException {
+        BigDecimal debt_missing = debtorEntity.getDebt_paid().subtract(debtorEntity.getDebt());
+        if (debt_missing.compareTo(BigDecimal.ZERO) < 0){
+            throw new BusinessException(Codes.INVALID_PARAMETERS, "Valor pago maior que o valor da divida");
+        }
+        debtorEntity.setDebt_missing(debt_missing);
     }
 
     @Override
@@ -179,6 +188,5 @@ public class DebtsServiceImpl implements DebtsService {
             throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na busca do Devedor");
         }
     }
-
 
 }
