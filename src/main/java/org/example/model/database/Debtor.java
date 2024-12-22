@@ -1,12 +1,7 @@
 package org.example.model.database;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NonNull;
-
-import java.util.List;
 
 @Data
 @Entity

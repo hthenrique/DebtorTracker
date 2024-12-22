@@ -1,7 +1,7 @@
 package org.example.model.mapper;
 
-import org.example.model.CreateDebtor;
-import org.example.model.UpdateDebtor;
+import org.example.model.debtor.CreateDebtor;
+import org.example.model.debtor.UpdateDebtor;
 import org.example.model.database.Debtor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -5,14 +5,13 @@ import org.example.exception.BusinessException;
 import org.example.exception.RepositoryException;
 import org.example.exception.SystemException;
 import org.example.model.ApplicationResponse;
-import org.example.model.CreateDebtor;
+import org.example.model.debtor.CreateDebtor;
 import org.example.model.Fetch;
-import org.example.model.UpdateDebtor;
+import org.example.model.debtor.UpdateDebtor;
 import org.example.model.database.Debtor;
 import org.example.model.mapper.DebtorMapper;
 import org.example.repository.DebtorRepository;
-import org.example.repository.DebtsRepository;
-import org.example.service.ApplicationService;
+import org.example.service.DebtorsService;
 import org.example.type.Codes;
 import org.example.util.CompareUtils;
 import org.example.util.StringUtils;
@@ -24,13 +23,10 @@ import java.util.NoSuchElementException;
 
 @Slf4j
 @Service
-public class ApplicationServiceImpl implements ApplicationService {
+public class DebtorsServiceImpl implements DebtorsService {
 
     @Autowired
     private DebtorRepository debtorRepository;
-
-    @Autowired
-    private DebtsRepository debtsRepository;
 
     @Autowired
     private DebtorMapper debtorMapper;
@@ -41,7 +37,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         List<Debtor> debtorsList = findDebtors();
 
         if (debtorsList.isEmpty()){
-            throw new BusinessException(Codes.NOT_FOUND, "Usuários não encontrados");
+            throw new BusinessException(Codes.NOT_FOUND, "Devedores não encontrados");
         }
 
         Fetch fetch = new Fetch();
@@ -71,14 +67,14 @@ public class ApplicationServiceImpl implements ApplicationService {
         ApplicationResponse applicationResponse = new ApplicationResponse();
         String id;
         if (findDebtor(debtor.getDoc_number(), "doc_number") != null){
-            throw new BusinessException(Codes.USER_ALREADY_EXISTS, "Usuário já cadastrado");
+            throw new BusinessException(Codes.USER_ALREADY_EXISTS, "Devedor já cadastrado");
         }
         Debtor debtorEntity = debtorMapper.toDebtor(debtor);
         try {
             id = String.valueOf(debtorRepository.saveAndFlush(debtorEntity).getId());
         } catch (Exception e){
-            log.error("Algo de errado aconteceu na criação do usuário", e);
-            throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na criação do usuário");
+            log.error("Algo de errado aconteceu na criação do Devedor", e);
+            throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na criação do Devedor");
         }
         applicationResponse.setResponse_code(Codes.CREATE_SUCCESS.getCode());
         applicationResponse.setResponse_message("Success");
@@ -97,8 +93,8 @@ public class ApplicationServiceImpl implements ApplicationService {
         try {
             debtorRepository.save(debtorEntity);
         } catch (Exception e){
-            log.error("Algo de errado aconteceu na atualização do usuário", e);
-            throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na atualização do usuário");
+            log.error("Algo de errado aconteceu na atualização do Devedor", e);
+            throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na atualização do Devedor");
         }
         applicationResponse.setResponse_code(Codes.SUCCESS.getCode());
         applicationResponse.setResponse_message("Success");
@@ -111,8 +107,8 @@ public class ApplicationServiceImpl implements ApplicationService {
         try {
             debtorRepository.deleteById(Long.valueOf(id));
         } catch (Exception e){
-            log.error("Algo de errado aconteceu na exclusão do usuário", e);
-            throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na exclusão do usuário");
+            log.error("Algo de errado aconteceu na exclusão do Devedor", e);
+            throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na exclusão do Devedor");
         }
         return null;
     }
@@ -121,8 +117,8 @@ public class ApplicationServiceImpl implements ApplicationService {
         try {
             return debtorRepository.findAll();
         } catch (Exception e){
-            log.error("Algo de errado aconteceu na busca dos usuários", e);
-            throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na busca dos usuários");
+            log.error("Algo de errado aconteceu na busca dos Devedores", e);
+            throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na busca dos Devedores");
         }
     }
 
@@ -135,11 +131,11 @@ public class ApplicationServiceImpl implements ApplicationService {
                 return debtorRepository.findByDocNumber(id);
             }
         } catch (NoSuchElementException e){
-            log.error("Usuário não encontrado", e);
-            throw new BusinessException(Codes.NOT_FOUND, "Usuário não encontrado");
+            log.error("Devedor não encontrado", e);
+            throw new BusinessException(Codes.NOT_FOUND, "Devedor não encontrado");
         } catch (Exception e){
-            log.error("Algo de errado aconteceu na busca do usuário", e);
-            throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na busca do usuário");
+            log.error("Algo de errado aconteceu na busca do Devedor", e);
+            throw new RepositoryException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na busca do Devedor");
         }
     }
 

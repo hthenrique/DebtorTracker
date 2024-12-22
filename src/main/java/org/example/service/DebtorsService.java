@@ -4,10 +4,10 @@ import org.example.exception.BusinessException;
 import org.example.exception.RepositoryException;
 import org.example.exception.SystemException;
 import org.example.model.ApplicationResponse;
-import org.example.model.CreateDebtor;
-import org.example.model.UpdateDebtor;
+import org.example.model.debtor.CreateDebtor;
+import org.example.model.debtor.UpdateDebtor;
 
-public interface ApplicationService {
+public interface DebtorsService {
     ApplicationResponse fetchUsers() throws BusinessException, RepositoryException;
     ApplicationResponse fetchUser(String id) throws RepositoryException, BusinessException;
     ApplicationResponse create(CreateDebtor debtor) throws BusinessException, RepositoryException;

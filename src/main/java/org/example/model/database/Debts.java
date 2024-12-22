@@ -16,10 +16,10 @@ public class Debts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_debt;
 
-    @Column(name = "id_debtor")
-    private Integer id_debtor;
+    @Column(name = "idDebtor", nullable = false)
+    private Integer idDebtor;
 
-    @Column(name = "debt_date")
+    @Column(name = "debt_date", nullable = false)
     private String debt_date;
 
     @Column(name = "debt")

@@ -2,8 +2,8 @@ package org.example.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.exception.SystemException;
-import org.example.model.UpdateDebtor;
 import org.example.model.database.Debtor;
+import org.example.model.database.Debts;
 import org.example.type.Codes;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -24,6 +24,18 @@ public class CompareUtils {
         }
 
         return oldDebtor;
+    }
+
+    public static Debts getUpdatedDebt(Debts oldDebt, Debts newDebt) throws SystemException {
+
+        try {
+            BeanUtils.copyProperties(newDebt, oldDebt, getNullPropertyNames(newDebt));
+        } catch (Exception e) {
+            log.error("Algo de errado aconteceu na comparação dos dados", e);
+            throw new SystemException(Codes.INTERNAL_SERVER_ERROR, "Algo de errado aconteceu na comparação dos dados");
+        }
+
+        return oldDebt;
     }
 
     private static String[] getNullPropertyNames(Object source) {
