@@ -2,7 +2,7 @@
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
-    src: url('../fonts/Roboto/Roboto-Regular.ttf');
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf');
     font-display: swap;
   }
 
@@ -28,6 +28,7 @@ button {
     border-radius: 10px;
     border: none;
     margin: 5px;
+    box-shadow: 0px 2.5px 7px 0px rgba(0, 0, 0, 0.35);
 }
 
 button:disabled {
@@ -83,4 +84,51 @@ input[type="text"]:focus {
 input[type="text"]:hover {
     border: none;
     background-color: #bbbbbb;
+}
+
+input[type="text"]:disabled {
+    border: none;
+    outline: none;
+    background-color: #f7f7f7;
+    color: #4b4b4b;
+}
+
+input[type="date"] {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ccc;
+}
+
+input[type="date"]:focus {
+    border: none;
+    outline: none;
+    background-color: #e4e3e3;
+}
+
+input[type="date"]:hover {
+    border: none;
+    background-color: #bbbbbb;
+}
+
+input[type="date"]:disabled {
+    border: none;
+    outline: none;
+    background-color: #f7f7f7;
+    color: #4b4b4b;
+}
+
+.error-message {
+    background-color: #f5bdc3;
+    color: #db4c5a;
+    font-size: 12px;
+    border: solid 1px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100%;
+    text-align: center;
+    padding: 10px;
 }

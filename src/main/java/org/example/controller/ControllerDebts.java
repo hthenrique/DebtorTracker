@@ -28,6 +28,13 @@ public class ControllerDebts {
         return ResponseEntity.ok(debtsService.fetchDebts());
     }
 
+    @GetMapping("/fetch_debt")
+    public ResponseEntity<ApplicationResponse> fetchDebtById(@RequestHeader("id") String id) throws RepositoryException, BusinessException {
+        logSeparator();
+        log.info(String.format("Fetching Debt with id %s", id));
+        return ResponseEntity.ok(debtsService.fetchDebtById(id));
+    }
+
     @GetMapping("/fetch_debts")
     public ResponseEntity<ApplicationResponse> fetchDebtsByUser(@RequestHeader("id") String id) throws RepositoryException, BusinessException {
         logSeparator();

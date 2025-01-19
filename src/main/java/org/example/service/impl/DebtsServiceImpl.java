@@ -41,7 +41,6 @@ public class DebtsServiceImpl implements DebtsService {
 
     @Override
     public ApplicationResponse fetchDebts() throws RepositoryException, BusinessException {
-        ApplicationResponse applicationResponse = new ApplicationResponse();
         List<Debts> debtorsList = findDebts();
 
         if (debtorsList.isEmpty()){
@@ -51,10 +50,24 @@ public class DebtsServiceImpl implements DebtsService {
         Fetch fetch = new Fetch();
         fetch.setDebts(debtorsList);
 
+        ApplicationResponse applicationResponse = new ApplicationResponse();
         applicationResponse.setResponse(fetch);
         applicationResponse.setResponse_code(Codes.SUCCESS.getCode());
         applicationResponse.setResponse_message("Success");
-        log.info("Success retrieved debtors");
+        log.info("Success retrieved debts");
+        return applicationResponse;
+    }
+
+    @Override
+    public ApplicationResponse fetchDebtById(String id) throws RepositoryException, BusinessException {
+        Debts debt = findDebt(StringUtils.isEmpty("id", id), "id_debt");
+        Fetch fetch = new Fetch();
+        fetch.setDebt(debt);
+        ApplicationResponse applicationResponse = new ApplicationResponse();
+        applicationResponse.setResponse(fetch);
+        applicationResponse.setResponse_code(Codes.SUCCESS.getCode());
+        applicationResponse.setResponse_message("Success");
+        log.info("Success retrieved debt {}", id);
         return applicationResponse;
     }
 

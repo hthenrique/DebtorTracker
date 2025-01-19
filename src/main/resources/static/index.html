@@ -6,14 +6,9 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Página Inicial</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='css/debtor.css'>
-    <script src='js/main.js'></script>
-    <script src='js/formatter.js'></script>
-    <script src='js/debtor_services.js'></script>
-    <script src='js/debt_services.js'></script>
-    <script src='js/debtor.js'></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='styles/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='styles/style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='styles/debtor.css'>
 </head>
 <header>
     <div>
@@ -24,28 +19,31 @@
     
     <main>
         <div style="display: flex; justify-content: right;">
-            <button class="btn btn-add">Adicionar novo devedor</button>
+            <button class="btn btn-add" onclick="showAddDebtor()">Adicionar novo devedor</button>
         </div>
-        <table id="list-debtors">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="list-debtors-tbody">
-            </tbody>
-        </table>
+        <div class="list-debtor-container">
+            <table id="list-debtors">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="list-debtors-tbody">
+                </tbody>
+            </table>
+        </div>
+        
 
         <div id="modal-debtor-info" class="modal" style="display: none;">
             <div id="modal-content" class="modal-content">
                 <div style="justify-content: space-between;" class="info-debtor-container">
                     <h2 id="info-debtor-title"></h2>
-                    <button id="save-debtor" class="btn btn-add">Salvar</button>
+                    <button id="save-debtor" class="btn btn-add" onclick="saveDebtor()">Salvar</button>
                 </div>
                 
                 <div id="info-user">
@@ -56,7 +54,7 @@
                         </div>
                         <div class="info-debtor-item">
                             <label for="cpf">CPF</label>
-                            <input type="text" id="cpf" oninput="maskCPF(event)"></input>
+                            <input type="text" id="cpf" oninput="maskCPF(event)" maxlength="14"></input>
                         </div>
                     </div>
                     <div class="info-debtor-container">
@@ -75,29 +73,81 @@
                             <input type="text" id="address"></input>
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: right;">
-                        <button id="button-add-debt" class="btn btn-add">Adicionar debito</button>
-                    </div>
-
                     <div>
-                        <table id="list-debtors">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Descrição</th>
-                                    <th>Débito</th>
-                                    <th>Data</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="list-debts-tbody">
-                            </tbody>
-                        </table>
+                        <div id="error-message" class="error-message" style="display: none;">
+                            <label id="error-message-label"></label>
+                        </div>
+                    </div>
+                    <div id="debts-container">
+                        <div style="display: flex; justify-content: right;">
+                            <button id="button-add-debt" class="btn btn-add" onclick="addNewDebt()">Adicionar debito</button>
+                        </div>
+                        <div id="list-debts-container" class="list-debts-container">
+                            <table id="list-debtors">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Descrição</th>
+                                        <th>Débito</th>
+                                        <th>Data</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="list-debts-tbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-debt-info" class="modal" style="display: none;">
+            <div id="modal-content" class="modal-content">
+                <div style="justify-content: space-between;" class="info-debtor-container">
+                    <h2 id="info-debt-title"></h2>
+                    <hidden id="hidden_debt_id"></hidden>
+                    <hidden id="hidden_debtor_id"></hidden>
+                    <button id="save-debt" class="btn btn-add" onclick="saveDebt()">Salvar</button>
+                </div>
+                
+                <div id="info-user">
+                    <div class="info-debtor-container">
+                        <div class="info-debtor-item">
+                            <label for="debt_date">Data da divida</label>
+                            <input type="date" id="debt_date"></input>
+                        </div>
+                        <div class="info-debtor-item">
+                            <label for="debt_missing">Valor faltante</label>
+                            <input type="text" id="debt_missing" disabled></input>
+                        </div>
+                    </div>
+                    <div class="info-debtor-container">
+                        <div class="info-debtor-item">
+                            <label for="debt">Valor a pagar</label>
+                            <input type="text" id="debt"></input>
+                        </div>
+                        <div class="info-debtor-item">
+                            <label for="debt_paid">Valor pago</label>
+                            <input type="text" id="debt_paid"></input>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="info-debtor-item">
+                            <label for="debt_description">Descrição</label>
+                            <input type="text" id="debt_description"></input>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="error-message" class="error-message" style="display: none;">
+                            <label id="error-message-label"></label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    <script type="module" src="scripts/main.js"></script>
 </body>
 
 </html>

@@ -9,6 +9,7 @@ import org.example.model.debts.UpdateDebt;
 
 public interface DebtsService {
     ApplicationResponse fetchDebts() throws BusinessException, RepositoryException;
+    ApplicationResponse fetchDebtById(String id) throws RepositoryException, BusinessException;
     ApplicationResponse fetchDebtsByDebtor(String id) throws RepositoryException, BusinessException;
     ApplicationResponse create(CreateDebt debtor) throws BusinessException, RepositoryException;
     ApplicationResponse update(UpdateDebt debtor) throws BusinessException, RepositoryException, SystemException;

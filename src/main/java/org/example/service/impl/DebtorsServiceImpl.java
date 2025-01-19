@@ -98,6 +98,7 @@ public class DebtorsServiceImpl implements DebtorsService {
         }
         applicationResponse.setResponse_code(Codes.SUCCESS.getCode());
         applicationResponse.setResponse_message("Success");
+        log.info(String.format("Success updated debtor id=%s", debtor.getId()));
         return applicationResponse;
     }
 
