@@ -34,6 +34,15 @@ public class ControllerDebtors {
         return ResponseEntity.ok(debtorsService.fetchUser(id));
     }
 
+    @GetMapping("/attribute/fetch_debtor")
+    public ResponseEntity<ApplicationResponse> fetchUserByAttribute(
+            @RequestHeader("field") String field,
+            @RequestHeader("attribute") String attribute) throws RepositoryException, BusinessException {
+        logSeparator();
+        log.info(String.format("Fetching User with field %s on attribute %s", field, attribute));
+        return ResponseEntity.ok(debtorsService.fetchUserByAttribute(attribute, field));
+    }
+
     @PostMapping("/create_debtor")
     public ResponseEntity<ApplicationResponse> create(@RequestBody CreateDebtor debtor) throws BusinessException, RepositoryException {
         logSeparator();

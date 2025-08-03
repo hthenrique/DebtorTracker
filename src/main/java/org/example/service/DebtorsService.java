@@ -10,6 +10,7 @@ import org.example.model.debtor.UpdateDebtor;
 public interface DebtorsService {
     ApplicationResponse fetchUsers() throws BusinessException, RepositoryException;
     ApplicationResponse fetchUser(String id) throws RepositoryException, BusinessException;
+    ApplicationResponse fetchUserByAttribute(String column, String value) throws RepositoryException, BusinessException;
     ApplicationResponse create(CreateDebtor debtor) throws BusinessException, RepositoryException;
     ApplicationResponse update(UpdateDebtor debtor) throws BusinessException, RepositoryException, SystemException;
     ApplicationResponse delete(String id) throws BusinessException, RepositoryException;

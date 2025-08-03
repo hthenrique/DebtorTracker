@@ -15,10 +15,15 @@
         <h1>Lista de pessoas cadastradas</h1>
     </div>
 </header>
+
 <body>
-    
+
     <main>
-        <div style="display: flex; justify-content: right;">
+        <div style="display: flex;justify-content: space-between;margin-right: 40px;margin-left: 40px;">
+            <div style="position: relative; display: flex; align-items: center;">
+                <img src="./assets/icons/search_icon.svg" alt="Buscar" style="position: absolute; left: 8px; width: 20px; height: 20px; pointer-events: none;">
+                <input id="search-debtor" style="padding-left: 36px;width: 280px;" type="text" placeholder="Buscar" oninput="searchDebtor(this.value)">
+            </div>
             <button class="btn btn-add" onclick="showAddDebtor()">Adicionar novo devedor</button>
         </div>
         <div class="list-debtor-container">
@@ -37,15 +42,19 @@
                 </tbody>
             </table>
         </div>
-        
+
 
         <div id="modal-debtor-info" class="modal" style="display: none;">
             <div id="modal-content" class="modal-content">
                 <div style="justify-content: space-between;" class="info-debtor-container">
                     <h2 id="info-debtor-title"></h2>
-                    <button id="save-debtor" class="btn btn-add" onclick="saveDebtor()">Salvar</button>
+                    <div>
+                        <button id="btn-delete" class="btn btn-danger btn-delete delete-debt"
+                            onclick="deleteDebtorProfile()">Excluir</button>
+                        <button id="save-debtor" class="btn btn-add" onclick="saveDebtor()">Salvar</button>
+                    </div>
                 </div>
-                
+
                 <div id="info-user">
                     <div class="info-debtor-container">
                         <div class="info-debtor-item">
@@ -80,7 +89,8 @@
                     </div>
                     <div id="debts-container">
                         <div style="display: flex; justify-content: right;">
-                            <button id="button-add-debt" class="btn btn-add" onclick="addNewDebt()">Adicionar debito</button>
+                            <button id="button-add-debt" class="btn btn-add" onclick="addNewDebt()">Adicionar
+                                debito</button>
                         </div>
                         <div id="list-debts-container" class="list-debts-container">
                             <table id="list-debtors">
@@ -110,7 +120,7 @@
                     <hidden id="hidden_debtor_id"></hidden>
                     <button id="save-debt" class="btn btn-add" onclick="saveDebt()">Salvar</button>
                 </div>
-                
+
                 <div id="info-user">
                     <div class="info-debtor-container">
                         <div class="info-debtor-item">

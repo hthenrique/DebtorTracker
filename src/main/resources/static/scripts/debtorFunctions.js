@@ -1,5 +1,6 @@
 import { saveDebtorService, updateDebtorService, fetchDebtors } from './services/apiDebtorService.js';
-import { displayDebtorInfo, createRowDebtor } from './debtor.js';
+import { displayDebtorInfo, createRowDebtor , getDebtorFormAttributes } from './debtor.js';
+import { displayDebtInfo } from './debt.js';
 
 export function showAddDebtor() {
   displayDebtorInfo(null);

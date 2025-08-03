@@ -40,6 +40,13 @@ export async function fetchDebtors() {
     });
 }
 
+export async function fetchDebtorsByAttribute(value, attribute) {
+    return fetchFromApi(`/attribute/fetch_debtor`, {
+        method: 'GET',
+        headers: { ...HEADERS, field: value, attribute: attribute }
+    });
+}
+
 export async function deleteDebtor(id) {
     if (!id) {
         return Promise.reject('UID is required');

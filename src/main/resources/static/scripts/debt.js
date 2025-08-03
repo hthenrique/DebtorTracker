@@ -9,10 +9,13 @@ export function displayDebtInfo(debt){
     const debt_paid = document.getElementById('debt_paid');
     const id_debt = document.getElementById('hidden_debt_id');
     const id_debtor = document.getElementById('hidden_debtor_id');
-    id_debtor.value = debt.idDebtor;
+    
+    if (debt != null) {
+        id_debtor.value = debt.idDebtor;
+    }
 
     if (debt != null){
-
+        
         id_debt.value = debt.id_debt;
 
         debt_description.value = debt.debt_description;

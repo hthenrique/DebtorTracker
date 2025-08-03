@@ -28,6 +28,9 @@ export function displayDebtorInfo(debtor) {
     maskCPF({ target: cpf });
     maskPhone({ target: phone });
 
+    const hidden_debtor_id = document.getElementById('hidden_debtor_id');
+    hidden_debtor_id.value = debtor.id;
+
     const title = document.getElementById('info-debtor-title');
     if (debtor == null) {
         title.textContent = `Adicionar novo devedor`;
